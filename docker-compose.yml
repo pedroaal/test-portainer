@@ -5,3 +5,5 @@ services:
     build: .
     image: webserver
     container_name: webserver
+    ports:
+      - 9020:80
