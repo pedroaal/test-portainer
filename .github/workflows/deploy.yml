@@ -1,0 +1,25 @@
+name: Deploy to portainer
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Login into ghcr
+        run: echo ${{ secrets.GiTHUB_TOKEN }} | docker login https://ghcr.io -u ${{github.actor}} --password-stdin
+
+      - name: Build, tag, and push image to ghcr
+        env:
+          REGISTRY: ghcr.io/${{github.repository_owner}}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $REGISTRY/test-portainer:$IMAGE_TAG .
+          docker push $REGISTRY/test-portainer:$IMAGE_TAG
