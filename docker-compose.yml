@@ -2,7 +2,7 @@ version: "3"
 
 services:
   webserver:
-    image: ghcr.io/pedroaal/test-portainer
+    image: ghcr.io/pedroaal/test-portainer:latest
     container_name: webserver
     ports:
       - 9020:80
