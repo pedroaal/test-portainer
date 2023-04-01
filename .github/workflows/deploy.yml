@@ -18,7 +18,7 @@ jobs:
 
       - name: Build, tag, and push image to ghcr
         env:
-          REGISTRY: ghcr.io/${{github.repository_owner}}
+          REGISTRY: ghcr.io/pedroaltamirano
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $REGISTRY/test-portainer:$IMAGE_TAG .
