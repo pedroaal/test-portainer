@@ -19,7 +19,9 @@ jobs:
       - name: Build, tag, and push image to ghcr
         env:
           REGISTRY: ghcr.io/${{ github.repository_owner }}
-          IMAGE_NAME: ${{ github.repository }}:${{ github.sha }}
+          IMAGE_NAME: ${{ github.repository }}
         run: |
-          docker build . -t $REGISTRY/$IMAGE_NAME
-          docker push $REGISTRY/$IMAGE_NAME
+          docker build . -t $IMAGE_NAME
+          docker image tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME:${{ github.sha }}
+          docker image tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME:latest
+          docker image push --all-tags $REGISTRY/$IMAGE_NAME
