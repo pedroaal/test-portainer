@@ -27,5 +27,5 @@ jobs:
 
       - name: Webhook
         uses: joelwmale/webhook-action@master
-        with:
-          url: ${{ secrets.WEBHOOK_URL }}
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL  }}
