@@ -23,5 +23,9 @@ jobs:
         run: |
           docker build . -t $IMAGE_NAME
           docker image tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME:${{ github.sha }}
-          docker image tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME:latest
-          docker image push --all-tags $REGISTRY/$IMAGE_NAME
+          docker image push $REGISTRY/$IMAGE_NAME:${{ github.sha }}
+
+      - name: Webhook
+        uses: joelwmale/webhook-action@master
+        with:
+          url: ${{ secrets.WEBHOOK_URL }}?tag=${{ github.sha }}
