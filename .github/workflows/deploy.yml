@@ -28,4 +28,4 @@ jobs:
       - name: Webhook
         uses: joelwmale/webhook-action@master
         with:
-          url: ${{ secrets.WEBHOOK_URL }}?tag=${{ github.sha }}
+          url: ${{ secrets.WEBHOOK_URL }}
